@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kinshuk Pandala — Resume</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a18'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='monospace' fill='%23e8e8e4'>y</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #fafaf8;
+      --bg2:    #f2f2ef;
+      --text:   #1a1a18;
+      --muted:  #888880;
+      --border: #e4e4e0;
+      --mono:   'Geist Mono', monospace;
+      --serif:  'Lora', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --bg:     #111110;
+      --bg2:    #1a1a18;
+      --text:   #e8e8e4;
+      --muted:  #666660;
+      --border: #2a2a28;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--mono); font-size: 13.5px; line-height: 1.75;
+      max-width: 860px; margin: 0 auto; padding: 0 24px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 32px 0 0; margin-bottom: 56px;
+    }
+    .btn-back {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .btn-back:hover { color: var(--text); }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .btn-download {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text); background: transparent;
+      border: 1px solid var(--border); padding: 6px 14px;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+    .btn-download:hover { border-color: var(--text); background: var(--bg2); }
+    #theme-toggle {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); font-family: var(--mono);
+      font-size: 11px; padding: 6px 10px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    #theme-toggle:hover { border-color: var(--text); color: var(--text); }
+
+    /* ── HEADER ── */
+    .r-header { margin-bottom: 48px; }
+    .r-name {
+      font-family: var(--serif); font-size: 1.7rem;
+      font-weight: 500; margin-bottom: 6px; line-height: 1.2;
+    }
+    .r-tagline { font-size: 12px; color: var(--muted); margin-bottom: 18px; line-height: 1.7; }
+    .r-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 12px; }
+    .r-contacts a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .r-contacts a:hover { color: var(--text); }
+
+    /* ── DIVIDER ── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 0 0 40px; }
+
+    /* ── SECTION ── */
+    .r-section { margin-bottom: 44px; }
+    .r-section-title {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── ENTRY ── */
+    .r-entry { padding: 16px 0; border-top: 1px solid var(--border); }
+    .r-entry:last-child { border-bottom: 1px solid var(--border); }
+    .r-entry-top {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 8px; margin-bottom: 3px;
+      flex-wrap: wrap;
+    }
+    .r-role { font-size: 13.5px; font-weight: 500; }
+    .r-period { font-size: 11px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .r-org { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .r-bullets { list-style: none; }
+    .r-bullets li {
+      font-size: 12px; color: var(--muted);
+      padding-left: 14px; position: relative; line-height: 1.75;
+    }
+    .r-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 32px; }
+    .skill-group-label { font-size: 11px; color: var(--muted); margin-bottom: 7px; letter-spacing: 0.04em; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-tag {
+      font-size: 11px; color: var(--muted);
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 2px 9px; border-radius: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 24px 0 40px;
+      font-size: 11px; color: var(--muted);
+      display: flex; justify-content: space-between;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 520px) {
+      .r-entry-top { flex-direction: column; gap: 2px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a class="btn-back" href="index.html">← back</a>
+  <div class="topbar-right">
+    <a class="btn-download" href="resume.pdf" download>↓ download pdf</a>
+    <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="r-header">
+  <div class="r-name">Kinshuk Pandala</div>
+  <div class="r-tagline">
+    ECE undergrad · pre-final year · VIT Bhopal University, India
+  </div>
+  <div class="r-contacts">
+    <a href="mailto:kinshuk2005@gmail.com">kinshuk2005@gmail.com</a>
+    <a href="https://kinshuk.github.io" target="_blank">kinshuk.github.io</a>
+    <a href="https://github.com/kinshukpandala" target="_blank">github/kinshukpandala</a>
+    <a href="https://linkedin.com/in/kinshukpandala" target="_blank">linkedin/kinshukpandala</a>
+  </div>
+</div>
+
+<hr/>
+
+<!-- EDUCATION -->
+<div class="r-section">
+  <div class="r-section-title">Education</div>
+
+  <div class="r-entry">
+    <div class="r-entry-top">
+      <span class="r-role">B.Tech — Electronics & Communication Engineering</span>
+      <span class="r-period">2023 — 2027</span>
+    </div>
+    <div class="r-org">VIT Bhopal University · Specialisation: AI & Cybernetics</div>
+    <ul class="r-bullets">
+      <li>GPA: 7.69 / 10</li>
+      <li>Relevant coursework: Embedded Systems, Robot Motion Control, Multimedia Signal Processing, Autonomous Robotics.</li>
+      <!-- Add achievements, scholarships here -->
+    </ul>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="r-section">
+  <div class="r-section-title">Experience</div>
+
+  <div class="r-entry">
+    <div class="r-entry-top">
+      <span class="r-role">Student Intern</span>
+      <span class="r-period">May 2025 — June 2025</span>
+    </div>
+    <div class="r-org">Bharat Electronics Limited · Bengaluru, India</div>
+    <ul class="r-bullets">
+      <li>Worked on secure communication systems analyzing subsystem architecture and signal flow.</li>
+      <li>Supported testing and validation of hardware modules, including interface-level debugging and documentation.</li>
+      <li>Improved technical documentation workflows for better system traceability and reporting.</li>
+    </ul>
+  </div>
+
+  <!-- Copy the block above to add more experience -->
+</div>
+
+<!-- PROJECTS -->
+<div class="r-section">
+  <div class="r-section-title">Projects</div>
+
+  <div class="r-entry">
+    <div class="r-entry-top">
+      <span class="r-role">Blackhole - portable ad-blocker</span>
+      <span class="r-period"><a href="https://github.com/kinshukpandala/blackhole" target="_blank" style="color:var(--muted);">github ↗</a></span>
+    </div>
+    <ul class="r-bullets">
+      <li>DNS based network filtering system on Raspi Zero 2 W to block ads & track domains.</li>
+      <li>Configured local DNS resolver and blocklists for continuous operation.</li>
+      <li>Language: Python, Bash</li>
+    </ul>
+  </div>
+
+  <div class="r-entry">
+    <div class="r-entry-top">
+      <span class="r-role">17 DOF Humanoid Robot</span>
+      <span class="r-period"><a href="https://github.com/yourhandle/eeg-classifier" target="_blank" style="color:var(--muted);">github ↗</a></span>
+    </div>
+    <ul class="r-bullets">
+      <li>Real-time EEG motor-imagery classifier: bandpass filter → feature extraction → SVM pipeline.</li>
+      <li>84% accuracy on 4-class task at a BCI hackathon.</li>
+      <li></li>
+    </ul>
+  </div>
+
+  <div class="r-entry">
+    <div class="r-entry-top">
+      <span class="r-role">QUENCH - Smart Water Vending Machine</span>
+      <span class="r-period"><a href="https://github.com/kinshukpandala/QUENCH_pi" target="_blank" style="color:var(--muted);">github ↗</a></span>
+    </div>
+    <ul class="r-bullets">
+      <li>IoT-enabled smart hydration system with wireless payment and real-time monitoring.</li>
+      <li>Designed for real time data monitoring via MQTT and Serial UART.</li>
+      <li>Language: C, Python, html, css, js</li>
+    </ul>
+  </div>
+
+  <!-- Copy the block above to add more projects -->
+</div>
+
+<!-- SKILLS -->
+<div class="r-section">
+  <div class="r-section-title">Skills</div>
+  <div class="skills-grid">
+    <div>
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C / C++</span>
+        <span class="skill-tag">MATLAB & Simulink</span>
+        <span class="skill-tag">Bash / Shell Scripting</span>
+        <span class="skill-tag">SQL / PostgreSQL</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Hardware & EDA</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Raspberry Pi</span>
+        <span class="skill-tag">ESP32</span>
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">KiCad</span>
+        <span class="skill-tag">EasyEDA</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Frameworks & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ROS2</span>
+        <span class="skill-tag">gazzibo</span>
+        <span class="skill-tag">OpenCV</span>
+        <span class="skill-tag">yolo</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Domains</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Embedded Systems</span>
+        <span class="skill-tag">Robotics</span>
+        <span class="skill-tag">Networking</span>
+        <span class="skill-tag">Hardware Design</span>
+        <span class="skill-tag">Multimedia Signal Processing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span><a href="index.html">← back to portfolio</a></span>
+  <span>last updated March 2025</span>
+</footer>
+
+<script>
+  // Theme — stays in sync with portfolio preference
+  const btn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') { html.setAttribute('data-theme', 'dark'); btn.textContent = '🌙'; }
+
+  btn.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      btn.textContent = '☀️';
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '🌙';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+
+</body>
+</html>
