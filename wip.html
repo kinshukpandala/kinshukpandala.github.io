@@ -1,103 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kinshuk Pandala</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="ECE undergrad specialising in AI & Cybernetics. PCB designer, automation engineer, robotics builder."/>
+  <meta name="author" content="kinshukpandala"/>
+  <meta property="og:type"        content="website"/>
+  <meta property="og:url"         content="https://kinshuk.github.io/"/>
+  <meta property="og:title"       content="Kinshuk Pandala — ECE, PCB & Automation"/>
+  <meta property="og:description" content="ECE undergrad specialising in AI & Cybernetics, PCB design, automation nd robotics."/>
+  <meta property="og:image"       content="https://kinshuk.github.io/og.png"/>
+  <meta name="twitter:card"       content="summary_large_image"/>
+  <meta name="twitter:site"       content="@the777thhomie"/>
+  <meta name="twitter:image"      content="https://kinshuk.github.io/og.png"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a18'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='monospace' fill='%23e8e8e4'>y</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg:           #fafaf8;
+      --bg2:          #f2f2ef;
+      --text:         #1a1a18;
+      --muted:        #888880;
+      --border:       #e4e4e0;
+      --accent:       #1a1a18;
+      --mono:         'Geist Mono', monospace;
+      --serif:        'Lora', Georgia, serif;
+      --tag-bg:       #e8e8e4;
+      --tag-text:     #4a4a46;
+      --tag-wip-bg:   #fff3e0;
+      --tag-wip-text: #92400e;
+    }
+    [data-theme="dark"] {
+      --bg:           #111110;
+      --bg2:          #1a1a18;
+      --text:         #e8e8e4;
+      --muted:        #666660;
+      --border:       #2a2a28;
+      --accent:       #e8e8e4;
+      --tag-bg:       #2a2a28;
+      --tag-text:     #888880;
+      --tag-wip-bg:   #2a1f0a;
+      --tag-wip-text: #e8a040;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background: #f8f8f7;
-      color: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+      background: var(--bg); color: var(--text);
+      font-family: var(--mono); font-size: 13.5px; line-height: 1.75;
+      max-width: 640px; margin: 0 auto; padding: 0 24px;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .container {
-      max-width: 520px;
-      padding: 20px;
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 32px 0 0; margin-bottom: 72px;
+    }
+    .nav-name { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-name:hover { color: var(--text); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; color: var(--muted); text-decoration: none;
+      transition: color 0.15s; position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--text); transition: width 0.2s;
+    }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after,
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { margin-bottom: 80px; }
+    .hero-top { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+    .avatar {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--border);
+      flex-shrink: 0; overflow: hidden; display: flex; align-items: center;
+      justify-content: center; font-size: 22px;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; line-height: 1.2; }
+    .hero-handle { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
+    .hero-bio { font-size: 14px; line-height: 1.85; margin-bottom: 20px; text-align: justify; }
+    .hero-bio a { color: var(--text); text-underline-offset: 3px; }
+    .hero-bio a:hover { color: var(--muted); }
+    .hero-meta { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+    .hero-meta span::before { content: '· '; }
+    .hero-meta span:first-child::before { content: ''; }
+    .socials { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+    .socials a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .socials a:hover { color: var(--text); }
+
+    .now-block {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 20px 22px; margin-bottom: 64px;
+    }
+    .now-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .now-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.15); flex-shrink: 0; animation: blink 2.5s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .now-items { display: flex; flex-direction: column; gap: 8px; }
+    .now-item { font-size: 12.5px; display: flex; gap: 10px; }
+    .now-item-label { color: var(--muted); min-width: 72px; flex-shrink: 0; }
+    .now-item-val { color: var(--text); line-height: 1.6; }
+    .now-updated { font-size: 10.5px; color: var(--muted); margin-top: 14px; }
+
+    .block { margin-bottom: 64px; }
+    .block-label {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted); margin-bottom: 24px;
     }
 
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 500;
-      margin-bottom: 8px;
+    .project {
+      padding: 20px 0; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 12px; align-items: start; text-decoration: none; color: inherit;
     }
+    .project:last-child { border-bottom: 1px solid var(--border); }
+    .project:hover .project-title { text-decoration: underline; text-underline-offset: 3px; }
+    .project-title { font-family: var(--serif); font-size: 15px; font-weight: 400; margin-bottom: 5px; transition: color 0.15s; }
+    .project-desc { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 10px; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 10.5px; color: var(--tag-text); background: var(--tag-bg); padding: 1px 8px; border-radius: 2px; letter-spacing: 0.02em; }
+    .tag.wip { background: var(--tag-wip-bg); color: var(--tag-wip-text); }
+    .project-arrow { font-size: 15px; color: var(--border); transition: color 0.15s; margin-top: 2px; flex-shrink: 0; }
+    .project:hover .project-arrow { color: var(--muted); }
 
-    .tagline {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 20px;
+    .service { padding: 20px 0; border-top: 1px solid var(--border); }
+    .service:last-child { border-bottom: 1px solid var(--border); }
+    .service-title { font-size: 13.5px; font-weight: 500; margin-bottom: 5px; }
+    .service-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .service-list { margin-top: 8px; list-style: none; }
+    .service-list li { font-size: 12px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.7; }
+    .service-list li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+
+    .pcb-block { border: 1px solid var(--border); padding: 24px; margin-bottom: 64px; background: var(--bg2); }
+    .pcb-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; margin-bottom: 10px; }
+    .pcb-desc { font-size: 12px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .pcb-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-bottom: 20px; }
+    .pcb-spec { font-size: 11.5px; }
+    .pcb-spec-label { color: var(--muted); }
+    .pcb-cta { font-size: 12px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: opacity 0.15s; }
+    .pcb-cta:hover { opacity: 0.6; }
+
+    .article {
+      padding: 18px 0; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 72px 1fr;
+      gap: 20px; text-decoration: none; color: inherit; align-items: start;
     }
+    .article:last-child { border-bottom: 1px solid var(--border); }
+    .article:hover .article-title { text-decoration: underline; text-underline-offset: 3px; }
+    .article-date { font-size: 11px; color: var(--muted); padding-top: 2px; line-height: 1.4; }
+    .article-title { font-size: 13.5px; margin-bottom: 3px; transition: color 0.15s; }
+    .article-excerpt { font-size: 11.5px; color: var(--muted); line-height: 1.6; }
 
-    .desc {
-      font-size: 0.9rem;
-      color: #777;
-      margin-bottom: 30px;
-      line-height: 1.5;
+    .contact-note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+    .field input, .field textarea, .field select {
+      font-family: var(--mono); font-size: 12.5px; color: var(--text);
+      background: transparent; border: 1px solid var(--border);
+      padding: 9px 12px; outline: none; transition: border-color 0.15s;
+      resize: vertical; -webkit-appearance: none; border-radius: 0;
     }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 18px;
-      font-size: 0.9rem;
-      color: #222;
-      background: transparent;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: all 0.2s ease;
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--text); }
+    .field textarea { min-height: 90px; }
+    .field select option { background: var(--bg); color: var(--text); }
+    .form-submit {
+      font-family: var(--mono); font-size: 12px; background: var(--text); color: var(--bg);
+      border: none; padding: 10px 22px; cursor: pointer;
+      align-self: flex-start; letter-spacing: 0.04em; transition: opacity 0.15s;
     }
+    .form-submit:hover { opacity: 0.7; }
+    .form-note { font-size: 11px; color: var(--muted); margin-top: -4px; transition: color 0.2s; }
+    .contact-links { display: flex; flex-direction: column; gap: 8px; }
+    .contact-link { display: flex; gap: 12px; font-size: 12.5px; text-decoration: none; color: var(--text); align-items: baseline; transition: color 0.15s; }
+    .contact-link:hover { color: var(--muted); }
+    .cl-label { font-size: 11px; color: var(--muted); min-width: 56px; }
 
-    .btn:hover {
-      border-color: #888;
-      background: #f1f1f0;
+    .avail { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--muted); margin-bottom: 64px; }
+    .avail-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; flex-shrink: 0; animation: blink 2.5s infinite; }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 0 40px;
+      font-size: 11.5px; color: var(--muted);
+      display: flex; justify-content: space-between; align-items: center;
     }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
 
-    .socials {
-      margin-top: 25px;
-      font-size: 0.85rem;
-      color: #888;
+    #toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: var(--text); color: var(--bg);
+      font-family: var(--mono); font-size: 11px; padding: 8px 16px; opacity: 0;
+      transition: opacity 0.2s, transform 0.2s; pointer-events: none;
+      white-space: nowrap; z-index: 9999; letter-spacing: 0.04em;
     }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .socials a {
-      color: #666;
-      text-decoration: none;
-      margin: 0 8px;
+    /* ── THEME TOGGLE ── */
+    #theme-toggle {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); font-family: var(--mono);
+      font-size: 11px; padding: 4px 10px; cursor: pointer;
+      transition: all 0.15s; letter-spacing: 0.04em;
+      flex-shrink: 0;
     }
+    #theme-toggle:hover { border-color: var(--text); color: var(--text); }
 
-    .socials a:hover {
-      color: #000;
+    @media (max-width: 520px) {
+      nav { margin-bottom: 48px; }
+      .nav-links { gap: 14px; }
+      .form-row { grid-template-columns: 1fr; }
+      .article { grid-template-columns: 1fr; gap: 4px; }
+      .pcb-specs { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 6px; align-items: flex-start; }
     }
-
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>Kinshuk Pandala</h1>
 
-    <div class="tagline">
-      ECE undergrad · Embedded Systems · IoT · Hardware
-    </div>
+<nav>
+  <a class="nav-name">kinshuk.</a>
+  <ul class="nav-links">
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#services">services</a></li>
+    <li><a href="resume.html">resume</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+</nav>
 
-    <div class="desc">
-      I’m currently rebuilding my portfolio to better reflect my work in embedded systems,
-      hardware design, and real-world engineering projects.
-    </div>
-
-    <a href="resume.html" class="btn">View Technical Resume</a>
-
-    <div class="socials">
-      <a href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a>
-      ·
-      <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">LinkedIn</a>
+<div class="hero">
+  <div class="hero-top">
+    <div class="avatar">🙂<!-- swap: <img src="photo.jpg" alt="Your Name"> --></div>
+    <div>
+      <div class="hero-name">Kinshuk Pandala</div>
+      <div class="hero-handle">@the777thhomie</div>
     </div>
   </div>
+  <p class="hero-bio">
+    ECE undergrad specialising in <a href="https://en.wikipedia.org/wiki/Cybernetics" target = "_blank">AI & Cybernetics</a>, 
+    working at the intersection of hardware and intelligence — spanning embedded systems, PCB design, control systems, and python automation. 
+    Focused on building systems that operate in the real world.
+  </p>
+  <div class="hero-meta">
+    <span>India 🇮🇳</span>
+    <span>VIT Bhopal University</span>
+    <span>open to internships</span>
+  </div>
+  <div class="socials">
+    <a href="https://github.com/kinshukpandala" target="_blank">GitHub</a>
+    <a href="https://x.com/the777thhomie" target="_blank">Twitter</a>
+    <a href="https://linkedin.com/in/kinshukpandala" target="_blank">LinkedIn</a>
+    <a href="mailto:kinshuk2005@gmail.com">Email</a>
+  </div>
+</div>
+
+<div class="now-block" id="now">
+  <div class="now-label"><span class="now-dot"></span> now</div>
+  <div class="now-items">
+    <div class="now-item"><span class="now-item-label">building</span><span class="now-item-val">an indoor SLAM model using ble beacon technology.</span></div>
+    <div class="now-item"><span class="now-item-label">learning</span><span class="now-item-val">Embedded C Programming.</span></div>
+    <div class="now-item"><span class="now-item-label">reading</span><span class="now-item-val">The 48 Laws of Power.</span></div>
+    <div class="now-item"><span class="now-item-label">open to</span><span class="now-item-val">Internship conversations — ECE, embedded systems, or automation roles.</span></div>
+  </div>
+  <div class="now-updated">last updated April 2026</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="block" id="experience">
+  <div class="block-label">experience</div>
+
+  <div style="padding: 20px 0; border-top: 1px solid var(--border);">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;">
+      <span style="font-size:13.5px; font-weight:500;">Student Intern</span>
+      <span style="font-size:11px; color:var(--muted);">May 2025 — June 2025</span>
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-bottom:8px;">Bharat Electronics Limited · Bengaluru, India</div>
+    <div style="font-size:12px; color:var(--muted); line-height:1.7;">
+      What you worked on. What you built or contributed to. Keep it one or two concrete sentences.
+    </div>
+  </div>
+
+</div>
+
+<div class="block" id="projects">
+  <div class="block-label">projects</div>
+  <a class="project" href="https://github.com/yourhandle/neuro-controller" target="_blank">
+    <div>
+      <div class="project-title">neuro-controller</div>
+      <div class="project-desc">Closed-loop PID controller where a neural net self-tunes gain parameters in real time. Tested on a DC motor rig with encoder feedback.</div>
+      <div class="project-tags"><span class="tag">python</span><span class="tag">control systems</span><span class="tag">embedded</span><span class="tag wip">ongoing</span></div>
+    </div>
+    <span class="project-arrow">↗</span>
+  </a>
+  <a class="project" href="https://github.com/yourhandle/eeg-classifier" target="_blank">
+    <div>
+      <div class="project-title">eeg-intent-classifier</div>
+      <div class="project-desc">Real-time EEG classifier using bandpass filtering and an SVM pipeline. 84% accuracy on motor-imagery tasks. Built for a BCI hackathon.</div>
+      <div class="project-tags"><span class="tag">python</span><span class="tag">signal processing</span><span class="tag">ml</span></div>
+    </div>
+    <span class="project-arrow">↗</span>
+  </a>
+  <a class="project" href="https://github.com/yourhandle/rf-anomaly" target="_blank">
+    <div>
+      <div class="project-title">rf-anomaly-detector</div>
+      <div class="project-desc">Lightweight autoencoder detecting anomalies in RF spectrum captures. Designed for low-power IoT security monitoring.</div>
+      <div class="project-tags"><span class="tag">c++</span><span class="tag">rf / sdr</span><span class="tag">cybersec</span></div>
+    </div>
+    <span class="project-arrow">↗</span>
+  </a>
+  <a class="project" href="https://yourhandle.github.io/arm-sim" target="_blank">
+    <div>
+      <div class="project-title">3-dof arm simulator</div>
+      <div class="project-desc">Robotic arm with analytically solved inverse kinematics, visualised in-browser with Three.js. Drag sliders, watch it move.</div>
+      <div class="project-tags"><span class="tag">javascript</span><span class="tag">three.js</span><span class="tag">robotics</span></div>
+    </div>
+    <span class="project-arrow">↗</span>
+  </a>
+</div>
+
+<div class="block" id="services">
+  <div class="block-label">services</div>
+  <div class="service">
+    <div class="service-title">Python automation</div>
+    <div class="service-desc">Repetitive workflows, data pipelines, scrapers, API integrations, scheduled jobs. If it's eating your time, I can script it away.</div>
+    <ul class="service-list">
+      <li>Web scraping & data extraction</li>
+      <li>Task scheduling & orchestration</li>
+      <li>API wrappers & report generation</li>
+    </ul>
+  </div>
+  <div class="service" style="opacity:0.45;">
+    <div class="service-title">PCB design <span style="font-size:10.5px;color:var(--muted);font-weight:400;">— coming soon</span></div>
+    <div class="service-desc">Schematic capture to Gerber handoff. KiCad · EasyEDA · Altium. </div>
+  </div>
+</div>
+
+<div class="pcb-block" id="pcb">
+  <div class="pcb-title">Python automation — freelance</div>
+  <div class="pcb-desc">
+    Got a repetitive workflow eating your time? I script it away.
+    Data pipelines, web scraping, file processing, API integrations, scheduled jobs —
+    if it's boring and manual, it shouldn't be.
+  </div>
+  <div class="pcb-specs">
+    <div class="pcb-spec"><span class="pcb-spec-label">Tools </span><span>Python · Selenium · Playwright</span></div>
+    <div class="pcb-spec"><span class="pcb-spec-label">Integrations </span><span>REST APIs · Webhooks · Sheets</span></div>
+    <div class="pcb-spec"><span class="pcb-spec-label">Delivery </span><span>Script · CLI tool · scheduled job</span></div>
+    <div class="pcb-spec"><span class="pcb-spec-label">Open to </span><span>One-off scripts & ongoing contracts</span></div>
+  </div>
+  <a href="#contact" class="pcb-cta">get in touch for a quote →</a>
+</div>
+
+
+
+<div class="block" id="contact">
+  <div class="block-label">contact</div>
+  <p class="contact-note">Building something with circuits, robots, or automation?<br>Or just want to talk shop — drop me a message.</p>
+  <form class="contact-form" id="contact-form" action="https://formspree.io/f/mojkgkep" method="POST">
+    <div class="form-row">
+      <div class="field">
+        <label for="fname">name</label>
+        <input id="fname" type="text" name="name" placeholder="Your name" required/>
+      </div>
+      <div class="field">
+        <label for="femail">email</label>
+        <input id="femail" type="email" name="email" placeholder="your@email.com" required/>
+      </div>
+    </div>
+    <div class="field">
+      <label for="ftype">what's this about?</label>
+      <select id="ftype" name="type">
+        <option value="">— pick one —</option>
+        <option value="pcb">PCB design project</option>
+        <option value="automation">Python / automation work</option>
+        <option value="robotics">Robotics / control systems</option>
+        <option value="collab">Collaboration or research</option>
+        <option value="other">Something else</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="fmsg">message</label>
+      <textarea id="fmsg" name="message" placeholder="Tell me what you're building..." required></textarea>
+    </div>
+    <button type="submit" class="form-submit" id="form-btn">send →</button>
+    <p class="form-note" id="form-status">// powered by Formspree · works on GitHub Pages, no backend needed</p>
+  </form>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:kinshuk2005@gmail.com"><span class="cl-label">email</span> <span class="__cf_email__" data-cfemail="176e786257726f767a677b723974787a">[email&#160;protected]</span></a>
+    <a class="contact-link" href="https://github.com/kinshukpandala" target="_blank"><span class="cl-label">github</span> github.com/kinshukpandala</a>
+    <a class="contact-link" href="https://linkedin.com/in/kinshukpandala" target="_blank"><span class="cl-label">linkedin</span> linkedin.com/in/kinshukpandala</a>
+    <a class="contact-link" href="https://x.com/the777thhomie" target="_blank"><span class="cl-label">twitter</span> @the777thhomie</a>
+  </div>
+</div>
+
+<div class="avail"><span class="avail-dot"></span> open to internships</div>
+
+<footer>
+  <span>© 2026 kinshuk</span>
+  <span>built with plain html · <a href="https://github.com/kinshukpandala/kinshuk.github.io" target="_blank">source</a></span>
+</footer>
+
+<div id="toast"></div>
+<script>
+  // ── Theme toggle ──
+  const toggleBtn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') { html.setAttribute('data-theme', 'dark'); toggleBtn.textContent = '🌙'; }
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      toggleBtn.textContent = '☀️';
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = '🌙';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  // ── Active nav on scroll ──
+  const setActive = () => {
+    let cur = '';
+    document.querySelectorAll('[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  // ── Toast ──
+  const toast = document.getElementById('toast');
+  let tt;
+  const showToast = msg => { clearTimeout(tt); toast.textContent = msg; toast.classList.add('show'); tt = setTimeout(() => toast.classList.remove('show'), 2500); };
+
+  // ── Contact form inline submit ──
+  const form = document.getElementById('contact-form');
+  const btn  = document.getElementById('form-btn');
+  const note = document.getElementById('form-status');
+  if (form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault(); btn.textContent = 'sending...'; btn.disabled = true;
+      try {
+        const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        if (r.ok) { form.reset(); btn.textContent = 'sent ✓'; note.textContent = "message received — I'll get back to you within 48 hrs."; note.style.color = '#22c55e'; }
+        else throw 0;
+      } catch { btn.textContent = 'send →'; btn.disabled = false; note.textContent = 'something went wrong — email me directly.'; note.style.color = '#ef4444'; }
+    });
+  }
+
+  // ── Keyboard shortcuts ──
+  const sc = { g:'https://github.com/kinshukpandala', t:'https://twitter.com/the777thhomie', l:'https://linkedin.com/in/kinshukpandala', r:'resume.html' };
+  const sl = { g:'GitHub', t:'Twitter', l:'LinkedIn', r:'Resume' };
+  document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName) || e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key.toLowerCase();
+    if (sc[k]) { window.open(sc[k], '_blank'); showToast('opening ' + sl[k] + '...'); }
+  });
+  if (!sessionStorage.getItem('kbd')) { setTimeout(() => showToast('tip · press G T L R to jump to links'), 2500); sessionStorage.setItem('kbd', '1'); }
+</script>
 </body>
 </html>
